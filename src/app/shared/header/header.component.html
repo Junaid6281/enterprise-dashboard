@@ -1,0 +1,23 @@
+<header class="app-header">
+  <div class="header-content">
+    <div class="logo-section">
+      <h1 class="app-title">Enterprise Dashboard</h1>
+    </div>
+    <nav class="main-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+      <a routerLink="/analytics" routerLinkActive="active" class="nav-link">Analytics</a>
+      <a routerLink="/reports" routerLinkActive="active" class="nav-link">Reports</a>
+      <!-- <a routerLink="/settings" routerLinkActive="active" class="nav-link">Settings</a> -->
+    </nav>
+    <div class="user-section">
+      <div class="user-info" (click)="toggleUserMenu()">
+        <span class="user-name">{{ currentUser.name }}</span>
+        <div class="user-avatar">{{ currentUser.avatar }}</div>
+        <div class="user-menu" *ngIf="showUserMenu">
+          <!-- <div class="menu-item" (click)="onProfileClick()">Profile</div> -->
+          <div class="menu-item" (click)="onLogoutClick()">Logout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

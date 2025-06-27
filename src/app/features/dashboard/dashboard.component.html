@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+  <!-- <header class="dashboard-header">
+    <h1>Enterprise Dashboard</h1>
+    <div class="header-actions">
+      <button class="btn btn-primary" (click)="loadDashboardData()">Refresh</button>
+      <button class="btn btn-secondary">Settings</button>
+    </div>
+  </header> -->
+
+  <main class="dashboard-content">
+    <div class="dashboard-grid">
+      <!-- Statistics Cards -->
+      <ng-container *ngIf="metrics.length; else loadingMetrics">
+        <div class="stat-card" *ngFor="let metric of metrics">
+          <div class="stat-icon"><i [class]="metric.icon"></i></div>
+          <div class="stat-content">
+            <h3>{{ metric.title }}</h3>
+            <p class="stat-number">
+              <ng-container *ngIf="metric.metricKey === 'revenue'; else normalValue">
+                ${{ metric.value | number:'1.0-0' }}
+              </ng-container>
+              <ng-template #normalValue>{{ metric.value | number:'1.0-0' }}</ng-template>
+            </p>
+            <span class="stat-change" [ngClass]="metric.changeType">
+              {{ metric.changeType === 'positive' ? '+' : '-' }}{{ metric.changeValue }}%
+            </span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loadingMetrics>
+        <div class="stat-card">Loading metrics...</div>
+      </ng-template>
+
+      <!-- Chart Section -->
+      <div class="chart-section">
+        <h2>Analytics Overview</h2>
+        <div *ngIf="!chartLabels.length">
+          <p>Chart visualization will be implemented here</p>
+        </div>
+        <div *ngIf="chartLabels.length">
+          <canvas baseChart
+            [data]="{ labels: chartLabels, datasets: chartDatasets }"
+            [options]="chartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="activity-section">
+        <h2>Recent Activity</h2>
+        <div class="activity-list" *ngIf="activity.length; else loadingActivity">
+          <div class="activity-item" *ngFor="let item of activity">
+            <div class="activity-icon"><i [class]="item.icon"></i></div>
+            <div class="activity-content">
+              <p>{{ item.message }}</p>
+              <span class="activity-time">{{ item.activityDate | date:'short' }}</span>
+            </div>
+          </div>
+        </div>
+        <ng-template #loadingActivity>
+          <div class="activity-item">Loading activity...</div>
+        </ng-template>
+      </div>
+    </div>
+  </main>
+</div> 

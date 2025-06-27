@@ -1,0 +1,75 @@
+<div class="analytics-container">
+  <div class="analytics-header">
+    <h1>Analytics Overview</h1>
+    <p>Comprehensive analytics and insights for your enterprise</p>
+  </div>
+
+  <div class="analytics-grid">
+    <!-- Key Metrics -->
+    <div class="metrics-section">
+      <h2>Key Metrics</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-chart-bar"></i></div>
+          <div class="metric-content">
+            <h3>Page Views</h3>
+            <p class="metric-value">{{ analyticsData.pageViews?.toLocaleString() }}</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-users"></i></div>
+          <div class="metric-content">
+            <h3>Unique Visitors</h3>
+            <p class="metric-value">{{ analyticsData.uniqueVisitors?.toLocaleString() }}</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="metric-content">
+            <h3>Bounce Rate</h3>
+            <p class="metric-value">{{ analyticsData.bounceRate }}%</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon"><i class="fas fa-stopwatch"></i></div>
+          <div class="metric-content">
+            <h3>Avg Session</h3>
+            <p class="metric-value">{{ analyticsData.avgSessionDuration }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Pages -->
+    <div class="top-pages-section">
+      <h2>Top Pages</h2>
+      <div class="pages-list">
+        <div class="page-item" *ngFor="let page of analyticsData.topPages; let i = index">
+          <div class="page-rank">{{ i + 1 }}</div>
+          <div class="page-info">
+            <h4>{{ page.page }}</h4>
+            <p>{{ page.views.toLocaleString() }} views</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Placeholder -->
+    <div class="chart-section">
+      <h2>Traffic Overview</h2>
+      <div *ngIf="!chartData">
+        <div class="chart-placeholder">
+          <p><i class="fas fa-chart-bar"></i> Chart visualization will be implemented here</p>
+          <p>This will show traffic trends over time</p>
+        </div>
+      </div>
+      <div *ngIf="chartData">
+        <canvas baseChart
+                [data]="{ labels: chartLabels, datasets: chartDatasets }"
+                [options]="chartOptions"
+                [type]="'line'">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

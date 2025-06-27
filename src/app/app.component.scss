@@ -1,0 +1,14 @@
+// Enterprise Dashboard App Styles
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+// Main Content Area
+.app-main {
+  flex: 1;
+  padding: 0;
+  background: #f8fafc;
+} 
